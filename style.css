@@ -12,29 +12,57 @@ body {
     flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center; /* Center the hero area vertically if space allows */
     padding-top: 50px;
     padding-bottom: 50px;
 }
 
-.container { 
-    max-width: 350px; 
-    padding: 20px; 
-    border: 2px solid #000;
+/* --- THE HERO (SIDE-BY-SIDE GRID) --- */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 50px;
+    max-width: 1000px; /* wider centered container */
+    margin: 0 auto;
+    padding: 0 20px;
+    align-items: center;
 }
 
-/* --- TYPOGRAPHY --- */
-h1 { font-size: 24px; font-weight: bold; margin: 0 0 20px 0; letter-spacing: 2px; }
+/* Left Column (The Pitch) */
+.hero-pitch-container h1 {
+    font-size: 32px; /* Bigger hero font */
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+}
+.hero-tagline {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+}
+.hero-pitch {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #505a5f;
+}
+
+/* Right Column (The Form Panel) */
+.hero-form-panel {
+    border: 2px solid #000;
+    padding: 30px;
+    background-color: #fff;
+    max-width: 350px; /* Keep form internal area narrow */
+    margin: 0 auto; /* center panel within its column */
+}
+
+/* --- GOV.UK TYPOGRAPHY --- */
 .gov-label { display: block; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
 .gov-hint { color: #505a5f; font-size: 14px; margin-bottom: 15px; line-height: 1.3; }
 
 /* --- FORM ELEMENTS --- */
 input { 
-    border: 2px solid #0b0c0c; 
-    padding: 8px; 
-    font-size: 18px; 
-    font-family: monospace;
-    width: 100%;
-    box-sizing: border-box;
+    border: 2px solid #0b0c0c; padding: 8px; font-size: 18px; font-family: monospace;
+    width: 100%; box-sizing: border-box;
 }
 input:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
 
@@ -54,8 +82,20 @@ button {
 button:hover { background: #333; }
 button:disabled { background: #ccc; cursor: not-allowed; }
 
-/* --- Q&A ACCORDION --- */
-.qa-section { margin-top: 40px; border-top: 2px solid #000; }
+/* --- NEW FULL-WIDTH Q&A ACCORDION --- */
+.full-width-qa { 
+    background-color: #f3f2f1; /* gov.uk light grey, same as footer */
+    border-top: 1px solid #b1b4b6;
+    margin-top: 60px;
+    padding: 40px 0;
+    width: 100%;
+}
+.qa-inner-container {
+    max-width: 650px; /* narrow central area for readability, not full-width */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.qa-section { border-top: 2px solid #000; }
 details { border-bottom: 1px solid #b1b4b6; padding: 15px 0; }
 summary { cursor: pointer; font-weight: bold; font-size: 19px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
 summary h3 { margin: 0; font-size: 19px; display: inline; }
@@ -69,3 +109,10 @@ footer {
     justify-content: space-between; font-size: 14px; border-top: 1px solid #b1b4b6; 
 }
 footer a { color: #000; text-decoration: underline; }
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; grid-gap: 30px; padding-top: 20px;}
+    .hero-pitch-container { text-align: center; }
+    .hero-form-panel { max-width: 100%; }
+}
