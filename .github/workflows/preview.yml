@@ -2,7 +2,7 @@ name: Deploy PR Preview
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
@@ -15,11 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy Preview
-        uses: afc163/gh-pages-pr-preview@v1
+      - name: Deploy to Folder
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          # This action handles the "umbrella" and PR numbering automatically
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          action: ${{ github.event.action }}
-          # Path to your files (the root of your repo)
-          path: .
+          folder: . # The files to upload
+          branch: gh-pages # The destination branch
+          target-folder: previews/pr-${{ github.event.number }} # The subfolder
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post Preview Link
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            🚀 **PR Preview Ready!**
+            You can view the changes here: [https://tidyswan.com/decader/previews/pr-${{ github.event.number }}/](https://tidyswan.com/decader/previews/pr-${{ github.event.number }}/)
