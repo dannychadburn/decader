@@ -4,244 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decader | The Manual</title>
-    <style>
-        /* GOV.UK + DECADER HYBRID STYLE */
-        body { 
-            font-family: "GDS Transport", arial, sans-serif, monospace; 
-            background: #ffffff; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            padding-top: 50px;
-        }
-        .container { 
-            max-width: 350px; 
-            padding: 20px; 
-            border: 2px solid #000;
-        }
-        h1 { 
-            font-size: 24px; 
-            font-weight: bold; 
-            margin: 0 0 20px 0; 
-            letter-spacing: 2px;
-        }
-        .gov-label { display: block; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
-        .gov-hint { color: #505a5f; font-size: 14px; margin-bottom: 15px; line-height: 1.3; }
-        
-        input { 
-            border: 2px solid #0b0c0c; 
-            padding: 8px; 
-            font-size: 18px; 
-            font-family: monospace;
-        }
-        input:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
-
-        .date-group { display: flex; gap: 10px; margin-bottom: 30px; }
-        .date-item label { display: block; font-size: 14px; margin-bottom: 5px; }
-        .input-day { width: 50px; }
-        .input-month { width: 50px; }
-        .input-year { width: 85px; }
-
-        .error-summary { 
-            border: 4px solid #d4351c; 
-            padding: 15px; 
-            margin-bottom: 20px; 
-            display: none;
-            color: #d4351c;
-            font-weight: bold;
-        }
-        .error-message { color: #d4351c; font-size: 14px; margin-top: 5px; display: none; }
-
-        button { 
-            width: 100%; 
-            padding: 15px; 
-            background: #000; 
-            color: #fff; 
-            border: none; 
-            font-weight: bold; 
-            font-size: 18px; 
-            cursor: pointer; 
-        }
-        button:hover { background: #333; }
-        button:disabled { background: #ccc; cursor: not-allowed; }
-
-        fieldset { border: none; padding: 0; margin: 0; }
-        legend { padding: 0; }
-
-/* Q&A Accordion Style */
-.qa-section {
-    margin-top: 40px;
-    border-top: 2px solid #000;
-}
-details {
-    border-bottom: 1px solid #b1b4b6;
-    padding: 15px 0;
-}
-summary {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 19px;
-    list-style: none; /* Removes default arrow */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-summary h3 {
-    margin: 0;
-    font-size: 19px;
-    display: inline;
-}
-/* Adds a custom plus/minus indicator */
-summary::after {
-    content: "+";
-    font-size: 24px;
-    font-weight: normal;
-}
-details[open] summary::after {
-    content: "−";
-}
-.qa-content {
-    margin-top: 10px;
-    padding-right: 20px;
-    line-height: 1.5;
-    color: #505a5f;
-}
-
-/* Footer Style */
-footer {
-    background-color: #f3f2f1; /* GOV.UK light grey offset */
-    margin-top: 60px;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    border-top: 1px solid #b1b4b6;
-}
-footer a {
-    color: #000;
-    text-decoration: underline;
-}
-footer a:hover {
-    text-decoration: none;
-}
-        
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <div id="errorSummary" class="error-summary">Please correct the errors below.</div>
-        
-        <h1>D E C A D E R</h1>
-        
-        <form id="signupForm" novalidate>
-            <label class="gov-label" for="email">Email address</label>
-            <div id="emailError" class="error-message">Enter a valid email address</div>
-            <input type="email" id="email" name="email" spellcheck="false" autocomplete="email">
+    <main class="main-content">
+        <div class="container">
+            <div id="errorSummary" class="error-summary">Please correct the errors below.</div>
+            
+            <h1>D E C A D E R</h1>
+            
+            <form id="signupForm" novalidate>
+                <label class="gov-label" for="email">Email address</label>
+                <div id="emailError" class="error-message">Enter a valid email address</div>
+                <input type="email" id="email" name="email" spellcheck="false" autocomplete="email">
 
-            <br><br>
+                <br><br>
 
-            <fieldset>
-                <legend class="gov-label">Date of birth</legend>
-                <div class="gov-hint">For example, 31 3 1980</div>
-                <div id="dateError" class="error-message">Enter a valid date of birth</div>
-                
-                <div class="date-group">
-                    <div class="date-item">
-                        <label for="day">Day</label>
-                        <input class="input-day" id="day" name="day" type="number" pattern="[0-9]*" inputmode="numeric">
+                <fieldset style="border:none; padding:0;">
+                    <legend class="gov-label">Date of birth</legend>
+                    <div class="gov-hint">For example, 31 3 1980</div>
+                    <div id="dateError" class="error-message">Enter a valid date of birth</div>
+                    
+                    <div class="date-group">
+                        <div class="date-item">
+                            <label for="day">Day</label>
+                            <input class="input-day" id="day" name="day" type="number" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                        <div class="date-item">
+                            <label for="month">Month</label>
+                            <input class="input-month" id="month" name="month" type="number" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                        <div class="date-item">
+                            <label for="year">Year</label>
+                            <input class="input-year" id="year" name="year" type="number" pattern="[0-9]*" inputmode="numeric">
+                        </div>
                     </div>
-                    <div class="date-item">
-                        <label for="month">Month</label>
-                        <input class="input-month" id="month" name="month" type="number" pattern="[0-9]*" inputmode="numeric">
-                    </div>
-                    <div class="date-item">
-                        <label for="year">Year</label>
-                        <input class="input-year" id="year" name="year" type="number" pattern="[0-9]*" inputmode="numeric">
-                    </div>
-                </div>
-            </fieldset>
+                </fieldset>
 
-            <button type="submit" id="submitBtn">BEGIN THE DECADE</button>
-        </form>
+                <button type="submit" id="submitBtn">BEGIN THE DECADE</button>
+            </form>
 
-        <div class="qa-section">
-    <details>
-        <summary><h3>What is this?</h3></summary>
-        <div class="qa-content">
-            Decader is a long-term synchronization tool. We provide high-impact guidance exactly when your biological and financial needs shift—once every ten years.
+            <div id="successMsg" style="display:none;">
+                <h2>Synchronization Complete.</h2>
+                <p>Your life manual is now standing by. Check your inbox.</p>
+            </div>
+
+            <div class="qa-section">
+                <details>
+                    <summary><h3>What is this?</h3></summary>
+                    <div class="qa-content">Decader is a long-term synchronization tool. We provide high-impact guidance exactly when your biological and financial needs shift—once every ten years.</div>
+                </details>
+                <details>
+                    <summary><h3>Why only once a decade?</h3></summary>
+                    <div class="qa-content">Most advice is noise. We focus on the signals that actually move the needle over a 10-year horizon.</div>
+                </details>
+            </div>
         </div>
-    </details>
+    </main>
 
-    <details>
-        <summary><h3>Why only once a decade?</h3></summary>
-        <div class="qa-content">
-            Most advice is noise. We focus on the signals that actually move the needle over a 10-year horizon. No weekly newsletters, no spam, just the manual.
-        </div>
-    </details>
-
-    <details>
-        <summary><h3>Is my data secure?</h3></summary>
-        <div class="qa-content">
-            We store only your email and birthday to trigger the Decader Engine. We do not sell data or track your browsing habits.
-        </div>
-    </details>
-</div>
-
-        <div id="successMsg" style="display:none;">
-            <h2>Sychronization Complete.</h2>
-            <p>Your life manual is now standing by. Check your inbox.</p>
-        </div>
-    </div>
+    <footer>
+        <span>decader copyright 2026</span>
+        <a href="mailto:hello@decadermail.com">contact us</a>
+    </footer>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz8WDuBI7vPm0auJsiv54q1-oe3vbMWx0Fxyc3fQkW97jeT6sSoh-jLawrfoVUvkwql/exec'; // <--- PASTE YOUR URL HERE
+        const scriptURL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'; 
         const form = document.getElementById('signupForm');
         
-        const showError = (type) => {
-            document.getElementById('errorSummary').style.display = 'block';
-            if(type === 'email') document.getElementById('emailError').style.display = 'block';
-            if(type === 'date') document.getElementById('dateError').style.display = 'block';
-        };
-
-        const resetErrors = () => {
+        form.addEventListener('submit', e => {
+            e.preventDefault();
             document.getElementById('errorSummary').style.display = 'none';
             document.getElementById('emailError').style.display = 'none';
             document.getElementById('dateError').style.display = 'none';
-        };
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            resetErrors();
             
             const email = document.getElementById('email').value;
             const d = parseInt(document.getElementById('day').value);
             const m = parseInt(document.getElementById('month').value);
             const y = parseInt(document.getElementById('year').value);
 
-            // 1. Email Validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) return showError('email');
-
-            // 2. Date Validation (Check if valid date and not in future)
             const dateObj = new Date(y, m - 1, d);
             const now = new Date();
-            
             const isValidDate = dateObj.getFullYear() === y && dateObj.getMonth() === m - 1 && dateObj.getDate() === d;
-            const isFuture = dateObj > now;
 
-            if (!isValidDate || isFuture || isNaN(y) || y < 1900) return showError('date');
+            if (!emailRegex.test(email)) {
+                document.getElementById('errorSummary').style.display = 'block';
+                document.getElementById('emailError').style.display = 'block';
+                return;
+            }
 
-            // 3. Submit
+            if (!isValidDate || dateObj > now || isNaN(y) || y < 1900) {
+                document.getElementById('errorSummary').style.display = 'block';
+                document.getElementById('dateError').style.display = 'block';
+                return;
+            }
+
             document.getElementById('submitBtn').disabled = true;
             document.getElementById('submitBtn').innerText = 'SYNCHRONIZING...';
 
-            // Construct formatted birthday for the sheet
-            const formattedDate = `${y}-${m}-${d}`;
-            
             const formData = new FormData();
             formData.append('email', email);
-            formData.append('birthday', formattedDate);
+            formData.append('birthday', `${y}-${m}-${d}`);
 
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
@@ -255,13 +122,5 @@ footer a:hover {
                 });
         });
     </script>
-
-    <footer>
-    <span>decader copyright 2026</span>
-    <a href="mailto:hello@decadermail.com">contact us</a>
-    </footer>
-    
-</body>
-</html>
 </body>
 </html>
