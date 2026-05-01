@@ -5,42 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decader | The Manual</title>
     <style>
-        body { font-family: monospace; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 2rem; border: 1px solid #ccc; box-shadow: 5px 5px 0px #000; width: 300px; }
-        h1 { font-size: 1.2rem; border-bottom: 1px solid #000; padding-bottom: 0.5rem; }
-        input { width: 100%; padding: 0.5rem; margin: 0.5rem 0; box-sizing: border-box; border: 1px solid #ccc; }
-        button { width: 100%; padding: 0.7rem; background: #000; color: #fff; border: none; cursor: pointer; margin-top: 1rem; }
+        /* GOV.UK + DECADER HYBRID STYLE */
+        body { 
+            font-family: "GDS Transport", arial, sans-serif, monospace; 
+            background: #ffffff; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px;
+        }
+        .container { 
+            max-width: 350px; 
+            padding: 20px; 
+            border: 2px solid #000;
+        }
+        h1 { 
+            font-size: 24px; 
+            font-weight: bold; 
+            margin: 0 0 20px 0; 
+            letter-spacing: 2px;
+        }
+        .gov-label { display: block; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+        .gov-hint { color: #505a5f; font-size: 14px; margin-bottom: 15px; line-height: 1.3; }
+        
+        input { 
+            border: 2px solid #0b0c0c; 
+            padding: 8px; 
+            font-size: 18px; 
+            font-family: monospace;
+        }
+        input:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
+
+        .date-group { display: flex; gap: 10px; margin-bottom: 30px; }
+        .date-item label { display: block; font-size: 14px; margin-bottom: 5px; }
+        .input-day { width: 50px; }
+        .input-month { width: 50px; }
+        .input-year { width: 85px; }
+
+        .error-summary { 
+            border: 4px solid #d4351c; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            display: none;
+            color: #d4351c;
+            font-weight: bold;
+        }
+        .error-message { color: #d4351c; font-size: 14px; margin-top: 5px; display: none; }
+
+        button { 
+            width: 100%; 
+            padding: 15px; 
+            background: #000; 
+            color: #fff; 
+            border: none; 
+            font-weight: bold; 
+            font-size: 18px; 
+            cursor: pointer; 
+        }
         button:hover { background: #333; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+
+        fieldset { border: none; padding: 0; margin: 0; }
+        legend { padding: 0; }
     </style>
 </head>
 <body>
-    <div class="card">
+
+    <div class="container">
+        <div id="errorSummary" class="error-summary">Please correct the errors below.</div>
+        
         <h1>D E C A D E R</h1>
-        <p>Your life's manual, delivered once a decade.</p>
-        <form id="signupForm">
-            <input type="email" name="email" placeholder="Email Address" required>
-            <input type="date" name="birthday" required>
+        
+        <form id="signupForm" novalidate>
+            <label class="gov-label" for="email">Email address</label>
+            <div id="emailError" class="error-message">Enter a valid email address</div>
+            <input type="email" id="email" name="email" spellcheck="false" autocomplete="email">
+
+            <br><br>
+
+            <fieldset>
+                <legend class="gov-label">Date of birth</legend>
+                <div class="gov-hint">For example, 31 3 1980</div>
+                <div id="dateError" class="error-message">Enter a valid date of birth</div>
+                
+                <div class="date-group">
+                    <div class="date-item">
+                        <label for="day">Day</label>
+                        <input class="input-day" id="day" name="day" type="number" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                    <div class="date-item">
+                        <label for="month">Month</label>
+                        <input class="input-month" id="month" name="month" type="number" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                    <div class="date-item">
+                        <label for="year">Year</label>
+                        <input class="input-year" id="year" name="year" type="number" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                </div>
+            </fieldset>
+
             <button type="submit" id="submitBtn">BEGIN THE DECADE</button>
         </form>
-        <p id="msg" style="display:none; font-size: 0.8rem; margin-top: 1rem; color: green;">Success. Check your inbox.</p>
+
+        <div id="successMsg" style="display:none;">
+            <h2>Sychronization Complete.</h2>
+            <p>Your life manual is now standing by. Check your inbox.</p>
+        </div>
     </div>
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz8WDuBI7vPm0auJsiv54q1-oe3vbMWx0Fxyc3fQkW97jeT6sSoh-jLawrfoVUvkwql/exec'; // <--- PASTE YOUR URL HERE
         const form = document.getElementById('signupForm');
         
+        const showError = (type) => {
+            document.getElementById('errorSummary').style.display = 'block';
+            if(type === 'email') document.getElementById('emailError').style.display = 'block';
+            if(type === 'date') document.getElementById('dateError').style.display = 'block';
+        };
+
+        const resetErrors = () => {
+            document.getElementById('errorSummary').style.display = 'none';
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('dateError').style.display = 'none';
+        };
+
         form.addEventListener('submit', e => {
             e.preventDefault();
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').innerText = 'SYCHRONIZING...';
+            resetErrors();
+            
+            const email = document.getElementById('email').value;
+            const d = parseInt(document.getElementById('day').value);
+            const m = parseInt(document.getElementById('month').value);
+            const y = parseInt(document.getElementById('year').value);
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            // 1. Email Validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) return showError('email');
+
+            // 2. Date Validation (Check if valid date and not in future)
+            const dateObj = new Date(y, m - 1, d);
+            const now = new Date();
+            
+            const isValidDate = dateObj.getFullYear() === y && dateObj.getMonth() === m - 1 && dateObj.getDate() === d;
+            const isFuture = dateObj > now;
+
+            if (!isValidDate || isFuture || isNaN(y) || y < 1900) return showError('date');
+
+            // 3. Submit
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').innerText = 'SYNCHRONIZING...';
+
+            // Construct formatted birthday for the sheet
+            const formattedDate = `${y}-${m}-${d}`;
+            
+            const formData = new FormData();
+            formData.append('email', email);
+            formData.append('birthday', formattedDate);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
-                    document.getElementById('signupForm').style.display = 'none';
-                    document.getElementById('msg').style.display = 'block';
+                    form.style.display = 'none';
+                    document.getElementById('successMsg').style.display = 'block';
                 })
-                .catch(error => console.error('Error!', error.message));
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    document.getElementById('submitBtn').disabled = false;
+                    document.getElementById('submitBtn').innerText = 'RETRY';
+                });
         });
     </script>
+</body>
+</html>
 </body>
 </html>
