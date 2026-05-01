@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decader | The Manual</title>
+    <style>
+        body { font-family: monospace; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 2rem; border: 1px solid #ccc; box-shadow: 5px 5px 0px #000; width: 300px; }
+        h1 { font-size: 1.2rem; border-bottom: 1px solid #000; padding-bottom: 0.5rem; }
+        input { width: 100%; padding: 0.5rem; margin: 0.5rem 0; box-sizing: border-box; border: 1px solid #ccc; }
+        button { width: 100%; padding: 0.7rem; background: #000; color: #fff; border: none; cursor: pointer; margin-top: 1rem; }
+        button:hover { background: #333; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>D E C A D E R</h1>
+        <p>Your life's manual, delivered once a decade.</p>
+        <form id="signupForm">
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="date" name="birthday" required>
+            <button type="submit" id="submitBtn">BEGIN THE DECADE</button>
+        </form>
+        <p id="msg" style="display:none; font-size: 0.8rem; margin-top: 1rem; color: green;">Success. Check your inbox.</p>
+    </div>
+
+    <script>
+        const scriptURL = 'YOUR_WEB_APP_URL_HERE'; // <--- PASTE YOUR URL HERE
+        const form = document.getElementById('signupForm');
+        
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').innerText = 'SYCHRONIZING...';
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    document.getElementById('signupForm').style.display = 'none';
+                    document.getElementById('msg').style.display = 'block';
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+</body>
+</html>
