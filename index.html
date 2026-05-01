@@ -67,6 +67,64 @@
 
         fieldset { border: none; padding: 0; margin: 0; }
         legend { padding: 0; }
+
+/* Q&A Accordion Style */
+.qa-section {
+    margin-top: 40px;
+    border-top: 2px solid #000;
+}
+details {
+    border-bottom: 1px solid #b1b4b6;
+    padding: 15px 0;
+}
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 19px;
+    list-style: none; /* Removes default arrow */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+summary h3 {
+    margin: 0;
+    font-size: 19px;
+    display: inline;
+}
+/* Adds a custom plus/minus indicator */
+summary::after {
+    content: "+";
+    font-size: 24px;
+    font-weight: normal;
+}
+details[open] summary::after {
+    content: "−";
+}
+.qa-content {
+    margin-top: 10px;
+    padding-right: 20px;
+    line-height: 1.5;
+    color: #505a5f;
+}
+
+/* Footer Style */
+footer {
+    background-color: #f3f2f1; /* GOV.UK light grey offset */
+    margin-top: 60px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    border-top: 1px solid #b1b4b6;
+}
+footer a {
+    color: #000;
+    text-decoration: underline;
+}
+footer a:hover {
+    text-decoration: none;
+}
+        
     </style>
 </head>
 <body>
@@ -106,6 +164,29 @@
 
             <button type="submit" id="submitBtn">BEGIN THE DECADE</button>
         </form>
+
+        <div class="qa-section">
+    <details>
+        <summary><h3>What is this?</h3></summary>
+        <div class="qa-content">
+            Decader is a long-term synchronization tool. We provide high-impact guidance exactly when your biological and financial needs shift—once every ten years.
+        </div>
+    </details>
+
+    <details>
+        <summary><h3>Why only once a decade?</h3></summary>
+        <div class="qa-content">
+            Most advice is noise. We focus on the signals that actually move the needle over a 10-year horizon. No weekly newsletters, no spam, just the manual.
+        </div>
+    </details>
+
+    <details>
+        <summary><h3>Is my data secure?</h3></summary>
+        <div class="qa-content">
+            We store only your email and birthday to trigger the Decader Engine. We do not sell data or track your browsing habits.
+        </div>
+    </details>
+</div>
 
         <div id="successMsg" style="display:none;">
             <h2>Sychronization Complete.</h2>
@@ -174,6 +255,12 @@
                 });
         });
     </script>
+
+    <footer>
+    <span>decader copyright 2026</span>
+    <a href="mailto:hello@decadermail.com">contact us</a>
+    </footer>
+    
 </body>
 </html>
 </body>
