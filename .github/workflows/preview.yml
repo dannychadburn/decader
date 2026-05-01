@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy Preview
-        uses: rossjirtle/pr-preview-action@v1
+        uses: afc163/gh-pages-pr-preview@v1
         with:
-          source-dir: . # Deploy the root of your repo
-          preview-branch: gh-pages # Where the previews are stored
-          umbrella-dir: previews # Previews will live at /previews/pr-X/
+          # This action handles the "umbrella" and PR numbering automatically
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           action: ${{ github.event.action }}
-          pr-number: ${{ github.event.number }}
+          # Path to your files (the root of your repo)
+          path: .
