@@ -1,0 +1,71 @@
+/* --- RESET & BASE --- */
+body { 
+    font-family: "Inter", "GDS Transport", arial, sans-serif, monospace; 
+    background: #ffffff; 
+    margin: 0; 
+    display: flex; 
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.container { 
+    max-width: 350px; 
+    padding: 20px; 
+    border: 2px solid #000;
+}
+
+/* --- TYPOGRAPHY --- */
+h1 { font-size: 24px; font-weight: bold; margin: 0 0 20px 0; letter-spacing: 2px; }
+.gov-label { display: block; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+.gov-hint { color: #505a5f; font-size: 14px; margin-bottom: 15px; line-height: 1.3; }
+
+/* --- FORM ELEMENTS --- */
+input { 
+    border: 2px solid #0b0c0c; 
+    padding: 8px; 
+    font-size: 18px; 
+    font-family: monospace;
+    width: 100%;
+    box-sizing: border-box;
+}
+input:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
+
+.date-group { display: flex; gap: 10px; margin-bottom: 30px; }
+.date-item label { display: block; font-size: 14px; margin-bottom: 5px; }
+.input-day, .input-month { width: 60px; }
+.input-year { width: 95px; }
+
+/* --- ERRORS & STATUS --- */
+.error-summary { border: 4px solid #d4351c; padding: 15px; margin-bottom: 20px; display: none; color: #d4351c; font-weight: bold; }
+.error-message { color: #d4351c; font-size: 14px; margin-top: 5px; display: none; }
+
+button { 
+    width: 100%; padding: 15px; background: #000; color: #fff; 
+    border: none; font-weight: bold; font-size: 18px; cursor: pointer; 
+}
+button:hover { background: #333; }
+button:disabled { background: #ccc; cursor: not-allowed; }
+
+/* --- Q&A ACCORDION --- */
+.qa-section { margin-top: 40px; border-top: 2px solid #000; }
+details { border-bottom: 1px solid #b1b4b6; padding: 15px 0; }
+summary { cursor: pointer; font-weight: bold; font-size: 19px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+summary h3 { margin: 0; font-size: 19px; display: inline; }
+summary::after { content: "+"; font-size: 24px; font-weight: normal; }
+details[open] summary::after { content: "−"; }
+.qa-content { margin-top: 10px; padding-right: 20px; line-height: 1.5; color: #505a5f; }
+
+/* --- FOOTER --- */
+footer { 
+    background-color: #f3f2f1; padding: 20px; display: flex; 
+    justify-content: space-between; font-size: 14px; border-top: 1px solid #b1b4b6; 
+}
+footer a { color: #000; text-decoration: underline; }
