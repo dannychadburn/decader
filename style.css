@@ -6,93 +6,66 @@ body {
     display: flex; 
     flex-direction: column;
     min-height: 100vh;
+    align-items: center; /* Centers everything globally */
 }
 
 .main-content {
     flex: 1;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center; /* Center the hero area vertically if space allows */
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 60px 20px;
 }
 
-/* --- THE HERO (SIDE-BY-SIDE GRID) --- */
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 50px;
-    max-width: 1000px; /* wider centered container */
-    margin: 0 auto;
-    padding: 0 20px;
-    align-items: center;
+/* --- TIGHT CENTRAL CONTAINER --- */
+.container { 
+    max-width: 420px; /* The "Tight" sweet spot */
+    width: 100%;
 }
 
-/* Left Column (The Pitch) */
-.hero-pitch-container h1 {
-    font-size: 32px; /* Bigger hero font */
-    margin: 0 0 10px 0;
-    letter-spacing: 2px;
-}
-.hero-tagline {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #000;
-}
-.hero-pitch {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #505a5f;
-}
+/* --- TYPOGRAPHY --- */
+h1 { font-size: 28px; font-weight: bold; margin: 0 0 10px 0; letter-spacing: 3px; }
+.hero-tagline { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+.hero-pitch { font-size: 16px; line-height: 1.6; color: #505a5f; margin-bottom: 35px; }
 
-/* Right Column (The Form Panel) */
-.hero-form-panel {
-    border: 2px solid #000;
-    padding: 30px;
-    background-color: #fff;
-    max-width: 350px; /* Keep form internal area narrow */
-    margin: 0 auto; /* center panel within its column */
-}
-
-/* --- GOV.UK TYPOGRAPHY --- */
 .gov-label { display: block; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
 .gov-hint { color: #505a5f; font-size: 14px; margin-bottom: 15px; line-height: 1.3; }
 
 /* --- FORM ELEMENTS --- */
 input { 
-    border: 2px solid #0b0c0c; padding: 8px; font-size: 18px; font-family: monospace;
+    border: 2px solid #0b0c0c; padding: 10px; font-size: 18px; font-family: monospace;
     width: 100%; box-sizing: border-box;
 }
 input:focus { outline: 3px solid #ffdd00; outline-offset: 0; }
 
-.date-group { display: flex; gap: 10px; margin-bottom: 30px; }
+.date-group { display: flex; gap: 12px; margin-bottom: 35px; }
 .date-item label { display: block; font-size: 14px; margin-bottom: 5px; }
-.input-day, .input-month { width: 60px; }
-.input-year { width: 95px; }
+.input-day, .input-month { width: 65px; }
+.input-year { width: 100px; }
 
 /* --- ERRORS & STATUS --- */
-.error-summary { border: 4px solid #d4351c; padding: 15px; margin-bottom: 20px; display: none; color: #d4351c; font-weight: bold; }
+.error-summary { border: 4px solid #d4351c; padding: 15px; margin-bottom: 25px; display: none; color: #d4351c; font-weight: bold; }
 .error-message { color: #d4351c; font-size: 14px; margin-top: 5px; display: none; }
 
 button { 
-    width: 100%; padding: 15px; background: #000; color: #fff; 
-    border: none; font-weight: bold; font-size: 18px; cursor: pointer; 
+    width: 100%; padding: 18px; background: #000; color: #fff; 
+    border: none; font-weight: bold; font-size: 18px; cursor: pointer; letter-spacing: 1px;
 }
 button:hover { background: #333; }
 button:disabled { background: #ccc; cursor: not-allowed; }
 
-/* --- NEW FULL-WIDTH Q&A ACCORDION --- */
-.full-width-qa { 
-    background-color: #f3f2f1; /* gov.uk light grey, same as footer */
-    border-top: 1px solid #b1b4b6;
-    margin-top: 60px;
-    padding: 40px 0;
+/* --- TWO-THIRDS WIDTH Q&A --- */
+.qa-outer-wrapper {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f3f2f1;
+    border-top: 1px solid #b1b4b6;
+    padding: 60px 0;
 }
-.qa-inner-container {
-    max-width: 650px; /* narrow central area for readability, not full-width */
-    margin: 0 auto;
+.qa-container {
+    width: 66%; /* Two-thirds width */
+    max-width: 800px;
     padding: 0 20px;
 }
 .qa-section { border-top: 2px solid #000; }
@@ -101,18 +74,16 @@ summary { cursor: pointer; font-weight: bold; font-size: 19px; list-style: none;
 summary h3 { margin: 0; font-size: 19px; display: inline; }
 summary::after { content: "+"; font-size: 24px; font-weight: normal; }
 details[open] summary::after { content: "−"; }
-.qa-content { margin-top: 10px; padding-right: 20px; line-height: 1.5; color: #505a5f; }
+.qa-content { margin-top: 10px; padding-right: 40px; line-height: 1.6; color: #505a5f; }
 
 /* --- FOOTER --- */
 footer { 
-    background-color: #f3f2f1; padding: 20px; display: flex; 
-    justify-content: space-between; font-size: 14px; border-top: 1px solid #b1b4b6; 
+    width: 100%;
+    background-color: #f3f2f1; padding: 25px 40px; box-sizing: border-box;
+    display: flex; justify-content: space-between; font-size: 14px; 
 }
 footer a { color: #000; text-decoration: underline; }
 
-/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
-    .hero-grid { grid-template-columns: 1fr; grid-gap: 30px; padding-top: 20px;}
-    .hero-pitch-container { text-align: center; }
-    .hero-form-panel { max-width: 100%; }
+    .qa-container { width: 90%; }
 }
