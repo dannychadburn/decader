@@ -12,47 +12,58 @@
 <body>
 
     <main class="main-content">
-        <div class="container">
-            <div id="errorSummary" class="error-summary">Please correct the errors below.</div>
+        <section class="hero-grid">
             
-            <h1>D E C A D E R</h1>
-            
-            <form id="signupForm" novalidate>
-                <label class="gov-label" for="email">Email address</label>
-                <div id="emailError" class="error-message">Enter a valid email address</div>
-                <input type="email" id="email" name="email" spellcheck="false" autocomplete="email">
-
-                <br><br>
-
-                <fieldset style="border:none; padding:0;">
-                    <legend class="gov-label">Date of birth</legend>
-                    <div class="gov-hint">For example, 31 3 1980</div>
-                    <div id="dateError" class="error-message">Enter a valid date of birth</div>
-                    
-                    <div class="date-group">
-                        <div class="date-item">
-                            <label for="day">Day</label>
-                            <input class="input-day" id="day" name="day" type="number" pattern="[0-9]*" inputmode="numeric">
-                        </div>
-                        <div class="date-item">
-                            <label for="month">Month</label>
-                            <input class="input-month" id="month" name="month" type="number" pattern="[0-9]*" inputmode="numeric">
-                        </div>
-                        <div class="date-item">
-                            <label for="year">Year</label>
-                            <input class="input-year" id="year" name="year" type="number" pattern="[0-9]*" inputmode="numeric">
-                        </div>
-                    </div>
-                </fieldset>
-
-                <button type="submit" id="submitBtn">BEGIN THE DECADE</button>
-            </form>
-
-            <div id="successMsg" style="display:none;">
-                <h2>Synchronization Complete.</h2>
-                <p>Your life manual is now standing by. Check your inbox.</p>
+            <div class="hero-column hero-pitch-container">
+                <h1>D E C A D E R</h1>
+                <p class="hero-tagline">The manual for the landmark years.</p>
+                <p class="hero-pitch">Every ten years, your life, body, and finances change. Most advice is a distraction. We provide the precise, long-term briefing you need—once a decade. Your manual is standing by.</p>
             </div>
 
+            <div class="hero-column hero-form-panel">
+                <div id="errorSummary" class="error-summary">Please correct the errors below.</div>
+                
+                <form id="signupForm" novalidate>
+                    <label class="gov-label" for="email">Email address</label>
+                    <div id="emailError" class="error-message">Enter a valid email address</div>
+                    <input type="email" id="email" name="email" spellcheck="false" autocomplete="email">
+
+                    <br><br>
+
+                    <fieldset style="border:none; padding:0;">
+                        <legend class="gov-label">Date of birth</legend>
+                        <div class="gov-hint">For example, 31 3 1980</div>
+                        <div id="dateError" class="error-message">Enter a valid date of birth</div>
+                        
+                        <div class="date-group">
+                            <div class="date-item">
+                                <label for="day">Day</label>
+                                <input class="input-day" id="day" name="day" type="number" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                            <div class="date-item">
+                                <label for="month">Month</label>
+                                <input class="input-month" id="month" name="month" type="number" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                            <div class="date-item">
+                                <label for="year">Year</label>
+                                <input class="input-year" id="year" name="year" type="number" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" id="submitBtn">BEGIN THE DECADE</button>
+                </form>
+
+                <div id="successMsg" style="display:none;">
+                    <h2>Synchronization Complete.</h2>
+                    <p>Your life manual is now standing by. Check your inbox.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="full-width-qa">
+        <div class="qa-inner-container">
             <div class="qa-section">
                 <details>
                     <summary><h3>What is this?</h3></summary>
@@ -64,7 +75,7 @@
                 </details>
             </div>
         </div>
-    </main>
+    </section>
 
     <footer>
         <span>decader copyright 2026</span>
@@ -72,55 +83,7 @@
     </footer>
 
     <script>
-        const scriptURL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'; 
-        const form = document.getElementById('signupForm');
-        
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            document.getElementById('errorSummary').style.display = 'none';
-            document.getElementById('emailError').style.display = 'none';
-            document.getElementById('dateError').style.display = 'none';
-            
-            const email = document.getElementById('email').value;
-            const d = parseInt(document.getElementById('day').value);
-            const m = parseInt(document.getElementById('month').value);
-            const y = parseInt(document.getElementById('year').value);
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const dateObj = new Date(y, m - 1, d);
-            const now = new Date();
-            const isValidDate = dateObj.getFullYear() === y && dateObj.getMonth() === m - 1 && dateObj.getDate() === d;
-
-            if (!emailRegex.test(email)) {
-                document.getElementById('errorSummary').style.display = 'block';
-                document.getElementById('emailError').style.display = 'block';
-                return;
-            }
-
-            if (!isValidDate || dateObj > now || isNaN(y) || y < 1900) {
-                document.getElementById('errorSummary').style.display = 'block';
-                document.getElementById('dateError').style.display = 'block';
-                return;
-            }
-
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').innerText = 'SYNCHRONIZING...';
-
-            const formData = new FormData();
-            formData.append('email', email);
-            formData.append('birthday', `${y}-${m}-${d}`);
-
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => {
-                    form.style.display = 'none';
-                    document.getElementById('successMsg').style.display = 'block';
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    document.getElementById('submitBtn').disabled = false;
-                    document.getElementById('submitBtn').innerText = 'RETRY';
-                });
-        });
+        // ... (Keep your existing script URL and all validation logic exactly as it is) ...
     </script>
 </body>
 </html>
